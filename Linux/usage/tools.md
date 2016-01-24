@@ -3,6 +3,6 @@
 *记录/日记 RedNotebook
 
 ###磁盘工具
-*分区工具gparted
-sudo apt-get install gparted
-*启动盘创建器
+* 分区工具gparted <br/>
+sudo apt-get install gparted <br />
+* 启动盘创建器 <br />
