@@ -8,7 +8,10 @@
 
 这要通过fdopen和fileno两个函数实现。它们都包含在头文件stdio.h中。
 
-fdopen的原型： FILE * fdopen(int filedes, const char *opentype);
+fdopen的原型： 
+`````C
+FILE * fdopen(int filedes, const char *opentype);
+`````
 第一个参数filedes是一个打开的文件描述符，opentype是表示打开方式的字符串，和fopen函数具有相同的取值，比如"w"或"w+"等。但是你必须保证该字符串的描述和文件实际的打开方式是匹配的。函数fopen()就是返回打开文件的指针；如果操作失败，返回空指针null。
 把文件流指针转换成文件描述符用fileno函数，其原型为：
 `````C
