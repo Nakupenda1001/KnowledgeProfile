@@ -5,6 +5,7 @@ sudo apt-get install autoconf automake libtool re2c flex make libxml2-dev libssl
 sudo git clone https://git.php.net/repository/php-src.git && cd php-src
 
 ##### Step3:编译安装PHP7
+./buildconf <br/>
 sudo ./configure --prefix=/usr/local/php7 \
  --with-curl \
  --with-freetype-dir \
