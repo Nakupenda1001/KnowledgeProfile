@@ -42,4 +42,35 @@ $find ... | cpio -ocB > filename
 解压时也要通过标准输入中读数据
 cpio -idc < filename
 
+#####进程
+1、linux Kill多个进程的案例:干掉nginx所有进程
+
+经常需要Kill多个进程，如果这些进程有共同的特点，就可以用一条命令Kill掉它们。比如清除Nginx所有进程：
+ps -aux|grep nginx|grep -v grep|cut -c 9-15|xargs kill -9
+
+管道符“|”用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入
+
+下面说说用管道符联接起来的几个命令：
+
+“ps -aux”是linux里查看所有进程的命令。这时检索出的进程将作为下一条命令“grep nginx”的输入。
+
+“grep nginx”的输出结果是，所有含有关键字“nginx”的进程，这是Nginx进程的共同特点。
+
+“grep -v grep”是在列出的进程中去除含有关键字“grep”的进程。
+
+“cut -c 9-15”是截取输入行的第9个字符到第15个字符，而这正好是进程号PID。
+
+“xargs kill -9”中的xargs命令是用来把前面命令的输出结果（PID）作为“kill -9”命令的参数，并执行该命令。
+
+kill -9”会强行杀掉指定进程，这样就成功清除了nginx的所有远程连接进程。其它类似的任务，只需要修改“grep nginx”中的关键字部分就可以了。
+
+2、多个进程如果是相同的进程名可以使用pkill命令
+
+"pkill"命令允许使用扩展的正则表达式和其它匹配方式。你现在可以使用应用的进程名kill掉它们，而不是使用PID。例如，要kill掉nginx，只需要运行命令：
+pkill  nginx
+
+3、多个进程如果是相同的进程名可以使用Killall命令
+
+killall同样使用进程名替代PID，并且它会kill掉所有的同名进程。例如，如果你正在运行多个nginx的实例，可以用命令把它们全部kill掉：
+killall  nginx
 
